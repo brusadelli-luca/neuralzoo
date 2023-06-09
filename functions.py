@@ -27,7 +27,7 @@ def info(dataset):
     print('data len :', len(dataset[b'data']))
     print('filenames len :', len(dataset[b'filenames']))
 
-def display_img(dataset, index):
+def display_img(dataset, meta, index):
 
     img = np.reshape(dataset[b'data'][index], (3, 1024))
     R = img[0]
@@ -42,5 +42,13 @@ def display_img(dataset, index):
     RGB = np.reshape(RGB, (32, 32, 3))
     
     plt.imshow(RGB)
-    plt.title(str(dataset[b'filenames'][index]) + '\n' + 'label : ' + str(dataset[b'labels'][index]))
+    plt.title(str(dataset[b'filenames'][index]) + '\n' + 'label : ' + str(meta[b'label_names'][dataset[b'labels'][index]]))
     plt.axis('off')
+
+
+def make_autopct(values):
+    def my_autopct(pct):
+        total = sum(values)
+        val = int(round(pct*total/100.0))
+        return '{p:.0f} %\n({v:d})'.format(p=pct,v=val)
+    return my_autopct
