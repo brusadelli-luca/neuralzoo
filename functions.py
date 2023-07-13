@@ -52,3 +52,26 @@ def make_autopct(values):
         val = int(round(pct*total/100.0))
         return '{p:.0f} %\n({v:d})'.format(p=pct,v=val)
     return my_autopct
+
+
+def filtre_2(dataset, filter_labels):
+    labels_filt = []
+    data_filt = []
+    filenames_filt = []
+
+    for i in range( len(dataset[b'labels']) ):
+        if dataset[b'labels'][i] in filter_labels:
+            labels_filt.append(dataset[b'labels'][i])
+            data_filt.append(dataset[b'data'][i])
+            filenames_filt.append(dataset[b'filenames'][i])
+    
+    return {b'batch_label': b'full filtered training dataset', b'labels': labels_filt, b'data': data_filt, b'filenames': filenames_filt}
+
+
+def display_img_2(dataset, meta, index):
+        
+    RGB = np.reshape(dataset[b'data'][index], (32, 32, 3))
+    
+    plt.imshow(RGB)
+    plt.title(str(dataset[b'filenames'][index]) + '\n' + 'label : ' + str(meta[b'label_names'][dataset[b'labels'][index]]))
+    plt.axis('off')
