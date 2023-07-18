@@ -3,7 +3,7 @@ Image recognition of animal pictures in CIFAR-10 dataset.
 ​
 ### Data exploration
 - **Dataset creation** : 
-- **Examples display** :
+- **Samples display** :
 - **Data exploration** :
   
 ### MultiLayer Perceptron (MLP)
